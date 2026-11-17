@@ -50,13 +50,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <body>
 <header><div class="wrap bar">
 <a class="brand" href="#top"><span class="logo"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="31" width="26" height="8" rx="3" fill="currentColor" opacity=".45"/><rect x="6" y="20" width="26" height="8" rx="3" fill="currentColor" opacity=".7"/><rect x="16" y="9" width="26" height="8" rx="3" fill="currentColor"/></svg></span><span class="bt"><b>Disklift</b><i>an ICN Solutions company</i></span></a>
-<nav><a href="#platforms">Platforms</a><a href="#features">Features</a><a href="#screens">Screens</a><a class="btn" href="https://www.icnsolutions.net">Get Disklift</a></nav>
+<nav><a href="#platforms">Platforms</a><a href="#features">Features</a><a href="#screens">Screens</a><a class="btn" href="#download">Download</a></nav>
 </div></header>
 <main id="top">
 <div class="wrap hero">
 <h1>Move VMs between hypervisors, then keep them protected</h1>
 <p class="lead">Disklift copies running VMs from VMware, Hyper-V and OpenStack to Proxmox, agentless and block by block. The same appliance replicates them for disaster recovery, with restore points and test failover.</p>
-<div class="cta"><a class="btn" href="https://www.icnsolutions.net">Download and try it</a><a class="btn alt" href="#features">See what it does</a></div>
+<div class="cta"><a class="btn" href="#download">Download and try it</a><a class="btn alt" href="#features">See what it does</a></div>
 <div class="shot"><img src="dashboard.jpg" alt="Disklift performance dashboard with live throughput and recent jobs" width="1600" height="800"></div>
 </div>
 
@@ -86,11 +86,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <div class="two"><div><h3>Admin settings</h3><p class="sub" style="margin:0">Users and roles, two-factor status and appliance settings in one place.</p></div><img src="admin.jpg" alt="Application settings with users, roles and two-factor status" loading="lazy"></div>
 </div></section>
 
-<section><div class="wrap" style="text-align:center">
-<h2>Try it on a test VM first</h2>
-<p class="sub" style="margin:0 auto 24px">Download the appliance and run it in evaluation mode. A licence lifts the evaluation limits when you are ready.</p>
-<a class="btn" href="https://www.icnsolutions.net">Go to icnsolutions.net</a>
-</div></section>
+<section id="download"><div class="wrap">
+<h2>Download Disklift</h2>
+<p class="sub">Free to download and run in evaluation mode. A licence lifts the evaluation limits when you are ready.</p>
+<div class="grid">
+<div class="card"><h3>Appliance for VMware</h3><p>Deploy on a vSphere host or cluster.</p><p style="margin-top:14px"><a class="btn" href="https://www.icnsolutions.net/download/vmware">Download (tar.zst)</a></p></div>
+<div class="card"><h3>Appliance for Proxmox</h3><p>Import as a VM on a Proxmox VE host.</p><p style="margin-top:14px"><a class="btn" href="https://www.icnsolutions.net/download/qcow2">Download (qcow2)</a></p></div>
+<div class="card"><h3>Licence and pricing</h3><p>Buy a licence, then activate it from the appliance.</p><p style="margin-top:14px"><a class="btn alt" href="https://www.icnsolutions.net/pricing">See pricing</a></p></div>
+</div></div></section>
 </main>
 <footer><div class="wrap"><span>Disklift, an ICN Solutions company</span><span>&copy; ICN Solutions, LLC</span></div></footer>
 </body>
