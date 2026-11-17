@@ -38,7 +38,7 @@ h2{font-size:30px;line-height:1.2;margin:0 0 10px;letter-spacing:-.01em}
 .card h3{margin:0 0 6px;font-size:18px}
 .card p{margin:0;color:var(--mute);font-size:16px}
 .card{border-top:3px solid var(--blue);padding-top:14px}
-.paths{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 6px;padding:0;list-style:none}
+.tbl{width:100%;border-collapse:collapse;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}.tbl th,.tbl td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}.tbl th{background:var(--tint);font-weight:600}.tbl tr:last-child td{border-bottom:0}.tw{overflow-x:auto}.beta{font-size:12px;background:var(--tint);color:var(--blue);padding:1px 8px;border-radius:999px;margin-left:6px}.steps{counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;padding:0;list-style:none;margin:0}.steps li{counter-increment:s;border-top:3px solid var(--blue);padding-top:14px}.steps li:before{content:counter(s);display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;font-weight:600;font-size:14px;margin-bottom:8px}.steps h3{margin:0 0 6px;font-size:18px}.steps p{margin:0;color:var(--mute);font-size:16px}.note{color:var(--mute);font-size:14.5px;margin-top:12px}.paths{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 6px;padding:0;list-style:none}
 .paths li{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:15px}
 .two{display:grid;grid-template-columns:1fr 1.25fr;gap:34px;align-items:center}
 .two img{width:100%;height:auto;border:1px solid var(--line);border-radius:12px}
@@ -50,35 +50,64 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <body>
 <header><div class="wrap bar">
 <a class="brand" href="#top"><span class="logo"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="31" width="26" height="8" rx="3" fill="currentColor" opacity=".45"/><rect x="6" y="20" width="26" height="8" rx="3" fill="currentColor" opacity=".7"/><rect x="16" y="9" width="26" height="8" rx="3" fill="currentColor"/></svg></span><span class="bt"><b>Disklift</b><i>an ICN Solutions company</i></span></a>
-<nav><a href="#platforms">Platforms</a><a href="#features">Features</a><a href="#screens">Screens</a><a class="btn" href="#download">Download</a></nav>
+<nav><a href="#platforms">Platforms</a><a href="#how">How it works</a><a href="#features">Features</a><a href="#screens">Screens</a><a href="https://www.icnsolutions.net/portal">Support</a><a href="https://www.icnsolutions.net/contact">Contact</a><a class="btn" href="https://www.icnsolutions.net/docs#download">Download</a></nav>
 </div></header>
 <main id="top">
 <div class="wrap hero">
 <h1>Move VMs between hypervisors, then keep them protected</h1>
 <p class="lead">Disklift copies running VMs from VMware, Hyper-V and OpenStack to Proxmox, agentless and block by block. The same appliance replicates them for disaster recovery, with restore points and test failover.</p>
-<div class="cta"><a class="btn" href="#download">Download and try it</a><a class="btn alt" href="#features">See what it does</a></div>
+<div class="cta"><a class="btn" href="https://www.icnsolutions.net/docs#download">Download and try it</a><a class="btn alt" href="#features">See what it does</a></div>
 <div class="shot"><img src="dashboard.jpg" alt="Disklift performance dashboard with live throughput and recent jobs" width="1600" height="800"></div>
 </div>
 
 <section id="platforms" class="tint"><div class="wrap">
-<h2>Works with the platforms you already run</h2>
-<p class="sub">Move between them or replicate within the same platform.</p>
-<ul class="paths"><li>VMware vSphere to Proxmox</li><li>Hyper-V to Proxmox</li><li>OpenStack to Proxmox</li><li>VMware to VMware</li><li>OpenStack to OpenStack</li><li>Proxmox to Proxmox</li><li>Hyper-V replication</li></ul>
+<h2>Supported migration and DR paths</h2>
+<p class="sub">Not just VMware to Proxmox. Every source and destination pair Disklift supports today.</p>
+<div class="tw"><table class="tbl">
+<thead><tr><th>Source</th><th>Destination</th><th>Migration</th><th>Disaster recovery</th></tr></thead>
+<tbody>
+<tr><td>VMware (vCenter or ESXi)</td><td>Proxmox</td><td>Yes</td><td>Yes: continuous sync, failover, test failover, failback</td></tr>
+<tr><td>VMware</td><td>VMware (another ESXi host)</td><td>Yes</td><td>Not yet</td></tr>
+<tr><td>OpenStack <span class="beta">Beta</span></td><td>Proxmox</td><td>Yes</td><td>Yes: continuous sync, failover, test failover (no failback to OpenStack)</td></tr>
+<tr><td>OpenStack <span class="beta">Beta</span></td><td>OpenStack (another endpoint)</td><td>Yes: first copy, continuous sync, cut-over</td><td>Not yet</td></tr>
+<tr><td>Hyper-V</td><td>Proxmox</td><td>Yes: first copy, repeat syncs and cut-over, with change tracking</td><td>Yes: continuous sync, failover, test failover (no failback to Hyper-V)</td></tr>
+<tr><td>Hyper-V</td><td>Hyper-V (another host)</td><td>-</td><td>Orchestrates Hyper-V's own native Replica: initial sync, test, planned and unplanned failover, reverse, health</td></tr>
+<tr><td>Proxmox</td><td>Proxmox (another node or cluster)</td><td>Yes</td><td>-</td></tr>
+</tbody></table></div>
+<p class="note">Beta marks paths that are built and covered by automated tests against simulated environments, and are still being proven on live infrastructure.</p>
 </div></section>
 
-<section id="features"><div class="wrap">
+<section id="how"><div class="wrap">
+<h2>How a move works</h2>
+<p class="sub">You choose how each source is read, then Disklift handles the copy and the cut-over.</p>
+<ol class="steps">
+<li><h3>Connect your hypervisors</h3><p>Add vCenter or ESXi, Hyper-V hosts, OpenStack endpoints and Proxmox nodes. Credentials are encrypted at rest.</p></li>
+<li><h3>Build a policy</h3><p>Group VMs with their own schedule, bandwidth cap and retry behavior, and map source networks to target networks.</p></li>
+<li><h3>Copy while the VM runs</h3><p>Online mode keeps the VM in production. A snapshot freezes the disks and changed-block tracking ships only what changed.</p></li>
+<li><h3>Cut over</h3><p>Optional graceful shutdown of the source, a final sync, checksum verification, then the new VM powers on. The original is kept until you delete it.</p></li>
+</ol>
+<p class="note">Prefer a cleaner copy? Offline mode shuts the VM down first. For VMware you can also keep a thin, powered-off safety clone of the original, made before cut-over. Destination space is checked before a copy starts.</p>
+</div></section>
+
+<section id="features" class="tint"><div class="wrap">
 <h2>What you get</h2>
 <p class="sub">One appliance for the move and for the protection that follows.</p>
 <div class="grid">
-<div class="card"><h3>Agentless, block-level copy</h3><p>Thin copy and changed-block tracking move only the data that changed. Optional compression and deduplication cut transfer time.</p></div>
-<div class="card"><h3>Continuous replication</h3><p>Set an RPO target and keep point-in-time restore points for each VM.</p></div>
-<div class="card"><h3>Test and planned failover</h3><p>Test failover, planned failover and failback, with the source up or down, and VLAN mapping for the target network.</p></div>
-<div class="card"><h3>Live visibility</h3><p>Throughput, progress and ETA per VM, plus datastore latency and disk queue measurements while a job runs.</p></div>
-<div class="card"><h3>Built for careful admins</h3><p>Encrypted credentials, pinned TLS and SSH host keys, two-factor sign-in, role-based access and a full audit trail.</p></div>
-<div class="card"><h3>Central logging and upgrades</h3><p>Forward events to up to five syslog servers. Upgrades are signature-checked before anything is installed.</p></div>
+<div class="card"><h3>Agentless, block-level copy</h3><p>Nothing to install in the guest. VMware over the vSphere API, OpenStack over API and SSH with Ceph, LVM or NFS back ends, Hyper-V from a checkpoint.</p></div>
+<div class="card"><h3>Thin copy and changed blocks</h3><p>After the first copy, only changed blocks cross the wire. Empty blocks are skipped. Savings are shown per job and on the dashboard.</p></div>
+<div class="card"><h3>Optional compression and deduplication</h3><p>Per-policy zstd compression and block deduplication, both off by default. Every local copy is read back and checked, and anything doubtful is sent normally.</p></div>
+<div class="card"><h3>Scheduling and policies</h3><p>Per-policy schedules, bandwidth caps and retries. Cut-overs and failovers always go first, and sync times are spread out so hundreds of VMs never come due at once.</p></div>
+<div class="card"><h3>Disaster recovery mode</h3><p>Keep replicating after cut-over: continuous sync, point-in-time restore points, test failover without touching the production replica, and RPO tracked live with a breach alert.</p></div>
+<div class="card"><h3>Live performance dashboard</h3><p>Throughput, jobs per hour, savings and job health, with history out to 90 days. Average RPO and RTO come from real measurements, with a per-job phase breakdown to the millisecond.</p></div>
+<div class="card"><h3>Hypervisor latency, measured honestly</h3><p>VMware datastore latency and queue, Hyper-V disk latency and queue, Proxmox CPU and I/O wait. If a platform has no counter, Disklift shows none instead of inventing one.</p></div>
+<div class="card"><h3>Security by design</h3><p>Role-based access, two-factor sign-in with any TOTP app, a full audit log, encrypted credentials with rotatable keys, and pinned TLS and SSH host keys. Passwords are never written to logs.</p></div>
+<div class="card"><h3>Built for large estates</h3><p>Add worker capacity with a single command, get a queue-wait alert before recovery targets are at risk, and let running jobs finish cleanly across restarts and upgrades.</p></div>
+<div class="card"><h3>Operations-ready</h3><p>Health checks for every service, forwarding to up to five syslog servers, automatic cleanup of old history, and warnings before the appliance disk fills.</p></div>
+<div class="card"><h3>Signed upgrades</h3><p>Upgrades are signature-checked before anything is installed, with a backup first and a self-test afterward. Releases are only offered to licensed installations.</p></div>
+<div class="card"><h3>Test it on your own workload</h3><p>Run in evaluation mode first. A licence, per protected seat for DR or for migration, lifts the evaluation limits.</p></div>
 </div></div></section>
 
-<section id="screens" class="tint"><div class="wrap">
+<section id="screens"><div class="wrap">
 <h2>See it working</h2>
 <p class="sub">Screens from the current release.</p>
 <div class="two" style="margin-bottom:40px"><div><h3>Live transfer detail</h3><p class="sub" style="margin:0">Watch throughput, progress and bandwidth for every job as it runs.</p></div><img src="throughput.jpg" alt="Transfer detail with live throughput and progress" loading="lazy"></div>
@@ -86,15 +115,24 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <div class="two"><div><h3>Admin settings</h3><p class="sub" style="margin:0">Users and roles, two-factor status and appliance settings in one place.</p></div><img src="admin.jpg" alt="Application settings with users, roles and two-factor status" loading="lazy"></div>
 </div></section>
 
-<section id="download"><div class="wrap">
+<section id="download" class="tint"><div class="wrap">
 <h2>Download Disklift</h2>
-<p class="sub">Free to download and run in evaluation mode. A licence lifts the evaluation limits when you are ready.</p>
+<p class="sub">Free to download and run in evaluation mode. The download page has the VMware and Proxmox appliances, with deployment steps.</p>
 <div class="grid">
-<div class="card"><h3>Appliance for VMware</h3><p>Deploy on a vSphere host or cluster.</p><p style="margin-top:14px"><a class="btn" href="https://www.icnsolutions.net/download/vmware">Download (tar.zst)</a></p></div>
-<div class="card"><h3>Appliance for Proxmox</h3><p>Import as a VM on a Proxmox VE host.</p><p style="margin-top:14px"><a class="btn" href="https://www.icnsolutions.net/download/qcow2">Download (qcow2)</a></p></div>
+<div class="card"><h3>Appliance for VMware</h3><p>Deploy on a vSphere host or cluster.</p><p style="margin-top:14px"><a class="btn" href="https://www.icnsolutions.net/docs#download">Go to downloads</a></p></div>
+<div class="card"><h3>Appliance for Proxmox</h3><p>Import as a VM on a Proxmox VE host.</p><p style="margin-top:14px"><a class="btn" href="https://www.icnsolutions.net/docs#download">Go to downloads</a></p></div>
 <div class="card"><h3>Licence and pricing</h3><p>Buy a licence, then activate it from the appliance.</p><p style="margin-top:14px"><a class="btn alt" href="https://www.icnsolutions.net/pricing">See pricing</a></p></div>
 </div></div></section>
+
+<section id="support"><div class="wrap">
+<h2>Support and contact</h2>
+<p class="sub">Questions before you buy, or help after you install.</p>
+<div class="grid">
+<div class="card"><h3>Support portal</h3><p>Open and track support cases.</p><p style="margin-top:14px"><a class="btn" href="https://www.icnsolutions.net/portal">Open the support portal</a></p></div>
+<div class="card"><h3>Contact us</h3><p>Sales, licensing and general questions.</p><p style="margin-top:14px"><a class="btn alt" href="https://www.icnsolutions.net/contact">Contact ICN Solutions</a></p></div>
+<div class="card"><h3>Documentation</h3><p>Deployment, connectivity, sizing and FAQ.</p><p style="margin-top:14px"><a class="btn alt" href="https://www.icnsolutions.net/docs">Read the docs</a></p></div>
+</div></div></section>
 </main>
-<footer><div class="wrap"><span>Disklift, an ICN Solutions company</span><span>&copy; ICN Solutions, LLC</span></div></footer>
+<footer><div class="wrap"><span>Disklift, an ICN Solutions company</span><span><a href="https://www.icnsolutions.net/portal">Support</a> &middot; <a href="https://www.icnsolutions.net/contact">Contact</a> &middot; <a href="https://www.icnsolutions.net/docs">Docs</a> &middot; &copy; ICN Solutions, LLC</span></div></footer>
 </body>
 </html>
